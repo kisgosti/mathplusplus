@@ -30,6 +30,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
+#define MATHPLUSPLUS_EXPORTS
+
 #include "pch.h"
 #include "math++.h"
 #include "trig.h"
