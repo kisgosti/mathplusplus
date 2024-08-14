@@ -33,6 +33,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
 #ifdef MATHPLUSPLUS_EXPORTS
+
 #define MATHPLUSPLUS_API __declspec(dllexport)
 #else
 #define MATHPLUSPLUS_API __declspec(dllimport)
@@ -41,3 +42,4 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "basics.h"
 #include "trig.h"
 #include "intx.h"
+#include "complex.h"
