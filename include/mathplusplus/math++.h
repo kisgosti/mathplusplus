@@ -33,7 +33,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
 #ifdef MATHPLUSPLUS_EXPORTS
-
 #define MATHPLUSPLUS_API __declspec(dllexport)
 #else
 #define MATHPLUSPLUS_API __declspec(dllimport)
