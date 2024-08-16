@@ -76,8 +76,8 @@ namespace math {
 		_NODISCARD constexpr inline const uint128_t operator/(const uint128_t& x) const;
 		_NODISCARD constexpr inline const uint128_t operator%(const uint128_t& x) const;
 
-		_NODISCARD operator uint64_t();
-		_NODISCARD operator uint32_t();
+		_NODISCARD explicit operator uint64_t() const;
+		_NODISCARD explicit operator uint32_t() const;
 
 		friend class uint256_t;
 		friend class uint512_t;
@@ -124,9 +124,9 @@ namespace math {
 		_NODISCARD constexpr inline const uint256_t operator/(const uint256_t& x) const;
 		_NODISCARD constexpr inline const uint256_t operator%(const uint256_t& x) const;
 
-		_NODISCARD operator uint128_t();
-		_NODISCARD operator uint64_t();
-		_NODISCARD operator uint32_t();
+		_NODISCARD explicit operator uint128_t() const;
+		_NODISCARD explicit operator uint64_t() const;
+		_NODISCARD explicit operator uint32_t() const;
 
 		friend class uint512_t;
 		friend class uint1024_t;
@@ -173,10 +173,10 @@ namespace math {
 		_NODISCARD constexpr inline const uint512_t operator/(const uint512_t& x) const;
 		_NODISCARD constexpr inline const uint512_t operator%(const uint512_t& x) const;
 
-		_NODISCARD operator uint256_t();
-		_NODISCARD operator uint128_t();
-		_NODISCARD operator uint64_t();
-		_NODISCARD operator uint32_t();
+		_NODISCARD explicit operator uint256_t() const;
+		_NODISCARD explicit operator uint128_t() const;
+		_NODISCARD explicit operator uint64_t() const;
+		_NODISCARD explicit operator uint32_t() const;
 
 		friend class uint1024_t;
 	};
@@ -223,15 +223,26 @@ namespace math {
 		_NODISCARD constexpr inline const uint1024_t operator/(const uint1024_t& x) const;
 		_NODISCARD constexpr inline const uint1024_t operator%(const uint1024_t& x) const;
 
-		_NODISCARD operator uint512_t();
-		_NODISCARD operator uint256_t();
-		_NODISCARD operator uint128_t();
-		_NODISCARD operator uint64_t();
-		_NODISCARD operator uint32_t();
+		_NODISCARD explicit operator uint512_t() const;
+		_NODISCARD explicit operator uint256_t() const;
+		_NODISCARD explicit operator uint128_t() const;
+		_NODISCARD explicit operator uint64_t() const;
+		_NODISCARD explicit operator uint32_t() const;
 	};
 }
 
-std::ostream& operator<<(std::ostream& os, const math::uint128_t& x);
+namespace std {
+
+	_NODISCARD const string to_string(const math::uint128_t& x);
+	_NODISCARD const string to_string(const math::uint256_t& x);
+	_NODISCARD const string to_string(const math::uint512_t& x);
+	_NODISCARD const string to_string(const math::uint1024_t& x);
+}
+
+inline std::ostream& operator<<(std::ostream& os, const math::uint128_t& x);
+inline std::ostream& operator<<(std::ostream& os, const math::uint256_t& x);
+inline std::ostream& operator<<(std::ostream& os, const math::uint512_t& x);
+inline std::ostream& operator<<(std::ostream& os, const math::uint1024_t& x);
 
 #undef	UINT128_MAX
 #define	UINT128_MAX			(static_cast<math::uint128_t>0 - 1)
