@@ -43,4 +43,30 @@ namespace math {
 	template<typename T>
 	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto csc(const T& x);
 
+	template<typename T>
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto actg(const T& x);
+
+	template<typename T>
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto asec(const T& x);
+
+	template<typename T>
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto acsc(const T& x);
+
+	template<typename T>
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto ctgh(const T& x);
+
+	template<typename T>
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto sech(const T& x);
+
+	template<typename T>
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto csch(const T& x);
+
+	template<typename T>
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto actgh(const T& x);
+
+	template<typename T>
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto asech(const T& x);
+
+	template<typename T>
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto acsch(const T& x);
 }
