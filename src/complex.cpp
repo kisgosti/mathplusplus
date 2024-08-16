@@ -297,7 +297,7 @@ namespace std {
 		std::string res = "";
 		if (x.re != 0 || x.im == 0) res += to_string(x.re);
 		if (x.re != 0 && x.im > 0) res += "+";
-		if (x.re != 0 && x.im < 0) res += "-";
+		if (x.im < 0) res += "-";
 		if (x.im != 0 && x.im != 1 && x.im != -1) res += to_string(abs(x.im));
 		if (x.im != 0) res += "i";
 		return res;
@@ -306,5 +306,10 @@ namespace std {
 
 template<typename T>
 inline std::ostream& operator<<(std::ostream& os, const math::complex<T>& x) {
-	return os << std::to_string(x);
+	if (x.re != 0 || x.im == 0) os << x.re;
+	if (x.re != 0 && x.im > 0) os << "+";
+	if (x.im < 0) os << "-";
+	if (x.im != 0 && x.im != 1 && x.im != -1) os << abs(x.im);
+	if (x.im != 0) os << "i";
+	return os;
 }
