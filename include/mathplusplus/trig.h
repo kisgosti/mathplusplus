@@ -35,12 +35,12 @@ POSSIBILITY OF SUCH DAMAGE.
 namespace math {
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr auto ctg(const T& x);
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto ctg(const T& x);
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr auto sec(const T& x);
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto sec(const T& x);
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr auto csc(const T& x);
+	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto csc(const T& x);
 
 }
