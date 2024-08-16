@@ -247,10 +247,10 @@ namespace math {
 		return res;
 	}
 
-	_NODISCARD uint128_t::operator uint64_t() {
+	_NODISCARD explicit uint128_t::operator uint64_t() const {
 		return ((uint64_t)buf[2] << 32) | buf[3];
 	}
-	_NODISCARD uint128_t::operator uint32_t() {
+	_NODISCARD explicit uint128_t::operator uint32_t() const {
 		return buf[3];
 	}
 
@@ -464,16 +464,16 @@ namespace math {
 		return res;
 	}
 
-	_NODISCARD uint256_t::operator uint128_t() {
+	_NODISCARD explicit uint256_t::operator uint128_t() const {
 		uint128_t res;
 		for (short i = 0; i < 4; i++)
 			res.buf[i] = buf[i + 4];
 		return res;
 	}
-	_NODISCARD uint256_t::operator uint64_t() {
+	_NODISCARD explicit uint256_t::operator uint64_t() const {
 		return ((uint64_t)buf[6] << 32) | buf[7];
 	}
-	_NODISCARD uint256_t::operator uint32_t() {
+	_NODISCARD explicit uint256_t::operator uint32_t() const {
 		return buf[7];
 	}
 
@@ -691,22 +691,22 @@ namespace math {
 		return res;
 	}
 
-	_NODISCARD uint512_t::operator uint256_t() {
+	_NODISCARD explicit uint512_t::operator uint256_t() const {
 		uint256_t res;
 		for (short i = 0; i < 8; i++)
 			res.buf[i] = buf[i + 8];
 		return res;
 	}
-	_NODISCARD uint512_t::operator uint128_t() {
+	_NODISCARD explicit uint512_t::operator uint128_t() const {
 		uint128_t res;
 		for (short i = 0; i < 4; i++)
 			res.buf[i] = buf[i + 12];
 		return res;
 	}
-	_NODISCARD uint512_t::operator uint64_t() {
+	_NODISCARD explicit uint512_t::operator uint64_t() const {
 		return ((uint64_t)buf[14] << 32) | buf[15];
 	}
-	_NODISCARD uint512_t::operator uint32_t() {
+	_NODISCARD explicit uint512_t::operator uint32_t() const {
 		return buf[15];
 	}
 
@@ -928,32 +928,97 @@ namespace math {
 		return res;
 	}
 
-	_NODISCARD uint1024_t::operator uint512_t() {
+	_NODISCARD explicit uint1024_t::operator uint512_t() const {
 		uint256_t res;
 		for (short i = 0; i < 16; i++)
 			res.buf[i] = buf[i + 16];
 		return res;
 	}
-	_NODISCARD uint1024_t::operator uint256_t() {
+	_NODISCARD explicit uint1024_t::operator uint256_t() const {
 		uint256_t res;
 		for (short i = 0; i < 8; i++)
 			res.buf[i] = buf[i + 24];
 		return res;
 	}
-	_NODISCARD uint1024_t::operator uint128_t() {
+	_NODISCARD explicit uint1024_t::operator uint128_t() const {
 		uint128_t res;
 		for (short i = 0; i < 4; i++)
 			res.buf[i] = buf[i + 28];
 		return res;
 	}
-	_NODISCARD uint1024_t::operator uint64_t() {
+	_NODISCARD explicit uint1024_t::operator uint64_t() const {
 		return ((uint64_t)buf[30] << 32) | buf[31];
 	}
-	_NODISCARD uint1024_t::operator uint32_t() {
+	_NODISCARD explicit uint1024_t::operator uint32_t() const {
 		return buf[31];
 	}
+}
 
-	std::ostream& operator<<(std::ostream& os, const math::uint128_t& x) {
-		return os;
+namespace std {
+
+	_NODISCARD const string to_string(const math::uint128_t& x) {
+		if (x == 0) return "0";
+		math::uint128_t tmp = x, s = 1;
+		while (s < tmp)
+			s *= 10;
+		string res = "";
+		while (tmp > 0) {
+			res += (char)(((uint32_t)(tmp / s)) + '0');
+			tmp %= s;
+			s /= 10;
+		}
+		return res;
 	}
+	_NODISCARD const string to_string(const math::uint256_t& x) {
+		if (x == 0) return "0";
+		math::uint256_t tmp = x, s = 1;
+		while (s < tmp)
+			s *= 10;
+		string res = "";
+		while (tmp > 0) {
+			res += (char)(((uint32_t)(tmp / s)) + '0');
+			tmp %= s;
+			s /= 10;
+		}
+		return res;
+	}
+	_NODISCARD const string to_string(const math::uint512_t& x) {
+		if (x == 0) return "0";
+		math::uint512_t tmp = x, s = 1;
+		while (s < tmp)
+			s *= 10;
+		string res = "";
+		while (tmp > 0) {
+			res += (char)(((uint32_t)(tmp / s)) + '0');
+			tmp %= s;
+			s /= 10;
+		}
+		return res;
+	}
+	_NODISCARD const string to_string(const math::uint1024_t& x) {
+		if (x == 0) return "0";
+		math::uint1024_t tmp = x, s = 1;
+		while (s < tmp)
+			s *= 10;
+		string res = "";
+		while (tmp > 0) {
+			res += (char)(((uint32_t)(tmp / s)) + '0');
+			tmp %= s;
+			s /= 10;
+		}
+		return res;
+	}
+}
+
+inline std::ostream& operator<<(std::ostream& os, const math::uint128_t& x) {
+	return os << std::to_string(x);
+}
+inline std::ostream& operator<<(std::ostream& os, const math::uint256_t& x) {
+	return os << std::to_string(x);
+}
+inline std::ostream& operator<<(std::ostream& os, const math::uint512_t& x) {
+	return os << std::to_string(x);
+}
+inline std::ostream& operator<<(std::ostream& os, const math::uint1024_t& x) {
+	return os << std::to_string(x);
 }
