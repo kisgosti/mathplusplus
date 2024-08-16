@@ -138,7 +138,7 @@ namespace math {
 	}
 	constexpr inline uint128_t& uint128_t::operator/=(const uint128_t& x) {
 		uint128_t res, one = 1;
-		int s = 0, m = 63, e = 127;
+		int16_t s = 0, m = 63, e = 127;
 		while (e > 0) {
 			uint128_t tmp = x;
 			tmp *= res | (one << m);
@@ -167,7 +167,7 @@ namespace math {
 	}
 	constexpr inline uint128_t& uint128_t::operator%=(const uint128_t& x) {
 		uint128_t res, one = 1;
-		int s = 0, m = 63, e = 127;
+		int16_t s = 0, m = 63, e = 127;
 		while (e > 0) {
 			uint128_t tmp = x;
 			tmp *= res | (one << m);
@@ -355,7 +355,7 @@ namespace math {
 	}
 	constexpr inline uint256_t& uint256_t::operator/=(const uint256_t& x) {
 		uint256_t res, one = 1;
-		int s = 0, m = 127, e = 255;
+		int16_t s = 0, m = 127, e = 255;
 		while (e > 0) {
 			uint256_t tmp = x;
 			tmp *= res | (one << m);
@@ -582,7 +582,7 @@ namespace math {
 	}
 	constexpr inline uint512_t& uint512_t::operator/=(const uint512_t& x) {
 		uint512_t res, one = 1;
-		int s = 0, m = 255, e = 511;
+		int16_t s = 0, m = 255, e = 511;
 		while (e > 0) {
 			uint512_t tmp = x;
 			tmp *= res | (one << m);
@@ -611,7 +611,7 @@ namespace math {
 	}
 	constexpr inline uint512_t& uint512_t::operator%=(const uint512_t& x) {
 		uint512_t res, one = 1;
-		int s = 0, m = 255, e = 511;
+		int16_t s = 0, m = 255, e = 511;
 		while (e > 0) {
 			uint512_t tmp = x;
 			tmp *= res | (one << m);
