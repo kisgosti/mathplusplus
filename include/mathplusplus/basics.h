@@ -32,11 +32,17 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #pragma once
 
+#ifdef MATHPLUSPLUS_EXPORTS
+#define MATHPLUSPLUS_API _declspec(dllexport)
+#else
+#define MATHPLUSPLUS_API _declspec(dllimport)
+#endif // MATHPLUSPLUS_EXPORTS
+
 namespace math {
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const T abs(const T& x);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const T abs(const T& x);
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const T sgn(const T& x);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const T sgn(const T& x);
 }
