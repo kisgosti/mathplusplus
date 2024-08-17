@@ -30,21 +30,17 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#define MATHPLUSPLUS_EXPORTS
-
-#include "pch.h"
-#include "math++.h"
 #include "basics.h"
 
 namespace math {
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const T abs(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const T abs(const T& x) {
 		return x < 0 ? -1 * x : x;
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const T sgn(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const T sgn(const T& x) {
 		return x == 0 ? 0 : x / abs(x);
 	}
 }
