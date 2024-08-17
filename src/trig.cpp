@@ -30,71 +30,67 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#define MATHPLUSPLUS_EXPORTS
-
-#include "pch.h"
-#include "math++.h"
 #include "trig.h"
 
 namespace math {
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto ctg(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto ctg(const T& x) {
 		return cos(x) / sin(x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto sec(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto sec(const T& x) {
 		return 1 / cos(x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto csc(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto csc(const T& x) {
 		return 1 / sin(x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto actg(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto actg(const T& x) {
 		return atan(1 / x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto asec(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto asec(const T& x) {
 		return acos(1 / x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto acsc(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto acsc(const T& x) {
 		return asin(1 / x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto ctgh(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto ctgh(const T& x) {
 		return 1 / tanh(x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto sech(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto sech(const T& x) {
 		return 1 / cosh(x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto csch(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto csch(const T& x) {
 		return 1 / sinh(x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto actgh(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto actgh(const T& x) {
 		return atanh(1 / x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto asech(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto asech(const T& x) {
 		return acosh(1 / x);
 	}
 
 	template<typename T>
-	MATHPLUSPLUS_API _NODISCARD constexpr inline const auto acsch(const T& x) {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto acsch(const T& x) {
 		return asinh(1 / x);
 	}
 }

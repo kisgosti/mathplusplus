@@ -30,12 +30,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#define MATHPLUSPLUS_EXPORTS
-
-#include "pch.h"
-#include "math++.h"
 #include "complex.h"
-#include "basics.h"
 
 namespace math {
 
@@ -64,54 +59,54 @@ namespace math {
 	}
 
 	template<typename T>
-	_NODISCARD constexpr inline const complex<T> complex<T>::comp() const {
+	[[nodiscard]] constexpr inline const complex<T> complex<T>::comp() const {
 		return complex<T>(re, -1 * im);
 	}
 	template<typename T>
-	_NODISCARD inline const T complex<T>::norm() const {
+	[[nodiscard]] inline const T complex<T>::norm() const {
 		return sqrt(abs(re) * abs(re) + abs(im) * abs(im));
 	}
 	template<typename T>
-	_NODISCARD inline const T complex<T>::snorm() const {
+	[[nodiscard]] inline const T complex<T>::snorm() const {
 		return im == 0 ? abs(re) * re : (*this).norm() * sgn(im);
 	}
 	template<typename T>
-	_NODISCARD inline const T complex<T>::arg() const {
+	[[nodiscard]] inline const T complex<T>::arg() const {
 		return im == 0 ? re == 0 ? 0 : M_PI * (1 - sgn(re)) / 2 : re == 0 ? M_PI_2 * (2 - sgn(im)) : M_PI * ((2 - sgn(im) * (sgn(re) + 1)) / 2) + sgn(re) * sgn(im) * atan2(abs(im), abs(re));
 	}
 	template<typename T>
-	_NODISCARD inline const T complex<T>::sarg() const {
+	[[nodiscard]] inline const T complex<T>::sarg() const {
 		return im == 0 ? ((1 - sgn(re)) / 2) * M_PI : M_PI * ((1 - sgn(re) * sgn(im)) / 2) + sgn(re) * sgn(im) * atan2(abs(im), abs(re));
 	}
 
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const bool complex<T>::operator==(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const bool complex<T>::operator==(const complex<U>& x) const {
 		return re == x.re && im == x.im;
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const bool complex<T>::operator!=(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const bool complex<T>::operator!=(const complex<U>& x) const {
 		return !(*this == x);
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const bool complex<T>::operator<(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const bool complex<T>::operator<(const complex<U>& x) const {
 		return (*this).snorm() == x.snorm() ? sarg() < x.sarg() : snorm() < x.snorm();
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const bool complex<T>::operator>(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const bool complex<T>::operator>(const complex<U>& x) const {
 		return x < *this;
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const bool complex<T>::operator<=(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const bool complex<T>::operator<=(const complex<U>& x) const {
 		return !(x < *this);
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const bool complex<T>::operator>=(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const bool complex<T>::operator>=(const complex<U>& x) const {
 		return !(*this < x);
 	}
 
@@ -188,104 +183,104 @@ namespace math {
 
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const auto complex<T>::operator+(const U& x) const {
+	[[nodiscard]] constexpr inline const auto complex<T>::operator+(const U& x) const {
 		using V = decltype(T() + U());
 		complex<V> res(re + x, im);
 		return res;
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const auto complex<T>::operator+(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const auto complex<T>::operator+(const complex<U>& x) const {
 		using V = decltype(T() + U());
 		complex<V> res(re + x.re, im + x.im);
 		return res;
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const auto complex<T>::operator-(const U& x) const {
+	[[nodiscard]] constexpr inline const auto complex<T>::operator-(const U& x) const {
 		using V = decltype(T() - U());
 		complex<V> res(re - x, im);
 		return res;
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const auto complex<T>::operator-(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const auto complex<T>::operator-(const complex<U>& x) const {
 		using V = decltype(T() - U());
 		complex<V> res(re - x.re, im - x.im);
 		return res;
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const auto complex<T>::operator*(const U& x) const {
+	[[nodiscard]] constexpr inline const auto complex<T>::operator*(const U& x) const {
 		using V = decltype(T()* U());
 		complex<V> res(re * x, im * x);
 		return res;
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const auto complex<T>::operator*(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const auto complex<T>::operator*(const complex<U>& x) const {
 		using V = decltype(T()* U());
 		complex<V> res(re * x.re - im * x.im, re * x.im + x.re * im);
 		return res;
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const auto complex<T>::operator/(const U& x) const {
+	[[nodiscard]] constexpr inline const auto complex<T>::operator/(const U& x) const {
 		using V = decltype(T() / U());
 		complex<V> res(re / x, im / x);
 		return res;
 	}
 	template<typename T>
 	template<typename U>
-	_NODISCARD constexpr inline const auto complex<T>::operator/(const complex<U>& x) const {
+	[[nodiscard]] constexpr inline const auto complex<T>::operator/(const complex<U>& x) const {
 		using V = decltype(T() / U());
 		complex<V> res((x.re * re + x.im * im) / (x.re * x.re + x.im * x.im), (x.re * im - re * x.im) / (x.re * x.re + x.im * x.im));
 		return res;
 	}
 
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const auto operator+(const T& x, const complex<U>& y) {
+	[[nodiscard]] constexpr inline const auto operator+(const T& x, const complex<U>& y) {
 		using V = decltype(T() + U());
 		complex<V> res(x + y.re, y.im);
 		return res;
 	}
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const auto operator-(const T& x, const complex<U>& y) {
+	[[nodiscard]] constexpr inline const auto operator-(const T& x, const complex<U>& y) {
 		using V = decltype(T() - U());
 		complex<V> res(x - y.re, -y.im);
 		return res;
 	}
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const auto operator*(const T& x, const complex<U>& y) {
+	[[nodiscard]] constexpr inline const auto operator*(const T& x, const complex<U>& y) {
 		using V = decltype(T()* U());
 		complex<V> res(x * y.re, x * y.im);
 		return res;
 	}
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const auto operator/(const T& x, const complex<U>& y) {
+	[[nodiscard]] constexpr inline const auto operator/(const T& x, const complex<U>& y) {
 		using V = decltype(T() / U());
 		complex<V> res(x * y.re / y.norm(), -x * y.im / y.norm());
 		return res;
 	}
 
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const complex<T> cxFromPolar(const T& r, const U& theta) {
+	[[nodiscard]] constexpr inline const complex<T> cxFromPolar(const T& r, const U& theta) {
 		complex<T> res(r * cos(theta), r * sin(theta));
 		return res;
 	}
 
 	template<typename T>
-	_NODISCARD constexpr inline const complex<T> cxSqrt(const complex<T>& x) {
+	[[nodiscard]] constexpr inline const complex<T> cxSqrt(const complex<T>& x) {
 		return cxFromPolar(sqrt(x.norm()), x.arg() / 2);
 	}
 
 	template<typename T>
-	_NODISCARD constexpr inline const complex<T> abs(const complex<T>& x) {
+	[[nodiscard]] constexpr inline const complex<T> abs(const complex<T>& x) {
 		return x.norm();
 	}
 
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const complex<T> cxPow(const complex<T>& b, const U& e) {
+	[[nodiscard]] constexpr inline const complex<T> cxPow(const complex<T>& b, const U& e) {
 		return cxFromPolar(pow(b.norm(), e), b.arg() * e);
 	}
 }
@@ -293,7 +288,7 @@ namespace math {
 namespace std {
 
 	template<typename T>
-	_NODISCARD const string to_string(const math::complex<T>& x) {
+	[[nodiscard]] const string to_string(const math::complex<T>& x) {
 		std::string res = "";
 		if (x.re != 0 || x.im == 0) res += to_string(x.re);
 		if (x.re != 0 && x.im > 0) res += "+";
