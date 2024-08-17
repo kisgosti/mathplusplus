@@ -30,50 +30,46 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#define MATHPLUSPLUS_EXPORTS
-
-#include "pch.h"
-#include "math++.h"
 #include "intx.h"
 
 #include <string>
 #include <stdint.h>
 
 namespace math {
-
-	_NODISCARD constexpr inline const uint32_t uint128_t::operator[](int16_t n) const {
+	
+	[[nodiscard]] constexpr inline const uint32_t uint128_t::operator[](int16_t n) const {
 		return 0 <= n && n < 4 ? buf[n] : 0;
 	}
 	constexpr uint128_t::uint128_t() : buf({ 0 }) {}
 	constexpr uint128_t::uint128_t(const uint64_t& x) : buf{ 0, 0, static_cast<uint32_t>(x >> 32), static_cast<uint32_t>(x) } {}
 	constexpr uint128_t::uint128_t(const uint128_t& x) : buf(x.buf) {}
 
-	_NODISCARD constexpr inline const bool uint128_t::operator==(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint128_t::operator==(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return false;
 		return true;
 	}
-	_NODISCARD constexpr inline const bool uint128_t::operator!=(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint128_t::operator!=(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return true;
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint128_t::operator<(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint128_t::operator<(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint128_t::operator>(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint128_t::operator>(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint128_t::operator<=(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint128_t::operator<=(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return true;
 	}
-	_NODISCARD constexpr inline const bool uint128_t::operator>=(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint128_t::operator>=(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return true;
@@ -196,65 +192,65 @@ namespace math {
 		return *this -= res;
 	}
 
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator|(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator|(const uint128_t& x) const {
 		uint128_t res(*this);
 		res |= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator^(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator^(const uint128_t& x) const {
 		uint128_t res(*this);
 		res ^= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator&(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator&(const uint128_t& x) const {
 		uint128_t res(*this);
 		res &= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator>>(const int& n) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator>>(const int& n) const {
 		uint128_t res(*this);
 		res >>= n;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator<<(const int& n) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator<<(const int& n) const {
 		uint128_t res(*this);
 		res <<= n;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator+(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator+(const uint128_t& x) const {
 		uint128_t res(*this);
 		res += x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator-(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator-(const uint128_t& x) const {
 		uint128_t res(*this);
 		res -= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator*(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator*(const uint128_t& x) const {
 		uint128_t res(*this);
 		res *= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator/(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator/(const uint128_t& x) const {
 		uint128_t res(*this);
 		res /= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint128_t uint128_t::operator%(const uint128_t& x) const {
+	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator%(const uint128_t& x) const {
 		uint128_t res(*this);
 		res %= x;
 		return res;
 	}
 
-	_NODISCARD explicit uint128_t::operator uint64_t() const {
+	[[nodiscard]] uint128_t::operator uint64_t() const {
 		return ((uint64_t)buf[2] << 32) | buf[3];
 	}
-	_NODISCARD explicit uint128_t::operator uint32_t() const {
+	[[nodiscard]] uint128_t::operator uint32_t() const {
 		return buf[3];
 	}
 
-	_NODISCARD constexpr inline const uint32_t uint256_t::operator[](int16_t n) const {
+	[[nodiscard]] constexpr inline const uint32_t uint256_t::operator[](int16_t n) const {
 		return 0 <= n && n < 8 ? buf[n] : 0;
 	}
 	constexpr uint256_t::uint256_t() : buf({ 0 }) {}
@@ -265,32 +261,32 @@ namespace math {
 	}
 	constexpr uint256_t::uint256_t(const uint256_t& x) : buf(x.buf) {}
 
-	_NODISCARD constexpr inline const bool uint256_t::operator==(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint256_t::operator==(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return false;
 		return true;
 	}
-	_NODISCARD constexpr inline const bool uint256_t::operator!=(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint256_t::operator!=(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return true;
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint256_t::operator<(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint256_t::operator<(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint256_t::operator>(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint256_t::operator>(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint256_t::operator<=(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint256_t::operator<=(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return true;
 	}
-	_NODISCARD constexpr inline const bool uint256_t::operator>=(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint256_t::operator>=(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return true;
@@ -413,71 +409,71 @@ namespace math {
 		return *this -= res;
 	}
 
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator|(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator|(const uint256_t& x) const {
 		uint256_t res(*this);
 		res |= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator^(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator^(const uint256_t& x) const {
 		uint256_t res(*this);
 		res ^= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator&(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator&(const uint256_t& x) const {
 		uint256_t res(*this);
 		res &= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator>>(const int& n) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator>>(const int& n) const {
 		uint256_t res(*this);
 		res >>= n;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator<<(const int& n) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator<<(const int& n) const {
 		uint256_t res(*this);
 		res <<= n;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator+(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator+(const uint256_t& x) const {
 		uint256_t res(*this);
 		res += x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator-(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator-(const uint256_t& x) const {
 		uint256_t res(*this);
 		res -= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator*(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator*(const uint256_t& x) const {
 		uint256_t res(*this);
 		res *= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator/(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator/(const uint256_t& x) const {
 		uint256_t res(*this);
 		res /= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint256_t uint256_t::operator%(const uint256_t& x) const {
+	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator%(const uint256_t& x) const {
 		uint256_t res(*this);
 		res %= x;
 		return res;
 	}
 
-	_NODISCARD explicit uint256_t::operator uint128_t() const {
+	[[nodiscard]] uint256_t::operator uint128_t() const {
 		uint128_t res;
 		for (short i = 0; i < 4; i++)
 			res.buf[i] = buf[i + 4];
 		return res;
 	}
-	_NODISCARD explicit uint256_t::operator uint64_t() const {
+	[[nodiscard]] uint256_t::operator uint64_t() const {
 		return ((uint64_t)buf[6] << 32) | buf[7];
 	}
-	_NODISCARD explicit uint256_t::operator uint32_t() const {
+	[[nodiscard]] uint256_t::operator uint32_t() const {
 		return buf[7];
 	}
 
-	_NODISCARD constexpr inline const uint32_t  uint512_t::operator[](int16_t n) const {
+	[[nodiscard]] constexpr inline const uint32_t  uint512_t::operator[](int16_t n) const {
 		return 0 <= n && n < 16 ? buf[n] : 0;
 	}
 	constexpr uint512_t::uint512_t() : buf({ 0 }) {}
@@ -492,32 +488,32 @@ namespace math {
 	}
 	constexpr uint512_t::uint512_t(const uint512_t& x) : buf(x.buf) {}
 
-	_NODISCARD constexpr inline const bool uint512_t::operator==(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint512_t::operator==(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return false;
 		return true;
 	}
-	_NODISCARD constexpr inline const bool uint512_t::operator!=(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint512_t::operator!=(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return true;
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint512_t::operator<(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint512_t::operator<(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint512_t::operator>(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint512_t::operator>(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint512_t::operator<=(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint512_t::operator<=(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return true;
 	}
-	_NODISCARD constexpr inline const bool uint512_t::operator>=(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint512_t::operator>=(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return true;
@@ -640,77 +636,77 @@ namespace math {
 		return *this -= res;
 	}
 
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator|(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator|(const uint512_t& x) const {
 		uint512_t res(*this);
 		res |= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator^(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator^(const uint512_t& x) const {
 		uint512_t res(*this);
 		res ^= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator&(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator&(const uint512_t& x) const {
 		uint512_t res(*this);
 		res &= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator>>(const int& n) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator>>(const int& n) const {
 		uint512_t res(*this);
 		res >>= n;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator<<(const int& n) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator<<(const int& n) const {
 		uint512_t res(*this);
 		res <<= n;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator+(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator+(const uint512_t& x) const {
 		uint512_t res(*this);
 		res += x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator-(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator-(const uint512_t& x) const {
 		uint512_t res(*this);
 		res -= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator*(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator*(const uint512_t& x) const {
 		uint512_t res(*this);
 		res *= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator/(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator/(const uint512_t& x) const {
 		uint512_t res(*this);
 		res /= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint512_t uint512_t::operator%(const uint512_t& x) const {
+	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator%(const uint512_t& x) const {
 		uint512_t res(*this);
 		res %= x;
 		return res;
 	}
 
-	_NODISCARD explicit uint512_t::operator uint256_t() const {
+	[[nodiscard]] uint512_t::operator uint256_t() const {
 		uint256_t res;
 		for (short i = 0; i < 8; i++)
 			res.buf[i] = buf[i + 8];
 		return res;
 	}
-	_NODISCARD explicit uint512_t::operator uint128_t() const {
+	[[nodiscard]] uint512_t::operator uint128_t() const {
 		uint128_t res;
 		for (short i = 0; i < 4; i++)
 			res.buf[i] = buf[i + 12];
 		return res;
 	}
-	_NODISCARD explicit uint512_t::operator uint64_t() const {
+	[[nodiscard]] uint512_t::operator uint64_t() const {
 		return ((uint64_t)buf[14] << 32) | buf[15];
 	}
-	_NODISCARD explicit uint512_t::operator uint32_t() const {
+	[[nodiscard]] uint512_t::operator uint32_t() const {
 		return buf[15];
 	}
 
-	_NODISCARD constexpr inline const uint32_t uint1024_t::operator[](int16_t n) const {
+	[[nodiscard]] constexpr inline const uint32_t uint1024_t::operator[](int16_t n) const {
 		return 0 <= n && n < 32 ? buf[n] : 0;
 	}
 	constexpr uint1024_t::uint1024_t() : buf({ 0 }) {}
@@ -729,32 +725,32 @@ namespace math {
 	}
 	constexpr uint1024_t::uint1024_t(const uint1024_t& x) : buf(x.buf) {}
 
-	_NODISCARD constexpr inline const bool uint1024_t::operator==(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint1024_t::operator==(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return false;
 		return true;
 	}
-	_NODISCARD constexpr inline const bool uint1024_t::operator!=(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint1024_t::operator!=(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return true;
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint1024_t::operator<(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint1024_t::operator<(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint1024_t::operator>(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint1024_t::operator>(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return false;
 	}
-	_NODISCARD constexpr inline const bool uint1024_t::operator<=(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint1024_t::operator<=(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return true;
 	}
-	_NODISCARD constexpr inline const bool uint1024_t::operator>=(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const bool uint1024_t::operator>=(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return true;
@@ -877,86 +873,86 @@ namespace math {
 		return *this -= res;
 	}
 
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator|(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator|(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res |= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator^(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator^(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res ^= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator&(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator&(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res &= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator>>(const int& n) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator>>(const int& n) const {
 		uint1024_t res(*this);
 		res >>= n;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator<<(const int& n) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator<<(const int& n) const {
 		uint1024_t res(*this);
 		res <<= n;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator+(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator+(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res += x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator-(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator-(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res -= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator*(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator*(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res *= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator/(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator/(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res /= x;
 		return res;
 	}
-	_NODISCARD constexpr inline const uint1024_t uint1024_t::operator%(const uint1024_t& x) const {
+	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator%(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res %= x;
 		return res;
 	}
 
-	_NODISCARD explicit uint1024_t::operator uint512_t() const {
+	[[nodiscard]] uint1024_t::operator uint512_t() const {
 		uint256_t res;
 		for (short i = 0; i < 16; i++)
 			res.buf[i] = buf[i + 16];
 		return res;
 	}
-	_NODISCARD explicit uint1024_t::operator uint256_t() const {
+	[[nodiscard]] uint1024_t::operator uint256_t() const {
 		uint256_t res;
 		for (short i = 0; i < 8; i++)
 			res.buf[i] = buf[i + 24];
 		return res;
 	}
-	_NODISCARD explicit uint1024_t::operator uint128_t() const {
+	[[nodiscard]] uint1024_t::operator uint128_t() const {
 		uint128_t res;
 		for (short i = 0; i < 4; i++)
 			res.buf[i] = buf[i + 28];
 		return res;
 	}
-	_NODISCARD explicit uint1024_t::operator uint64_t() const {
+	[[nodiscard]] uint1024_t::operator uint64_t() const {
 		return ((uint64_t)buf[30] << 32) | buf[31];
 	}
-	_NODISCARD explicit uint1024_t::operator uint32_t() const {
+	[[nodiscard]] uint1024_t::operator uint32_t() const {
 		return buf[31];
 	}
 }
 
 namespace std {
 
-	_NODISCARD const string to_string(const math::uint128_t& x) {
+	[[nodiscard]] const string to_string(const math::uint128_t& x) {
 		if (x == 0) return "0";
 		math::uint128_t tmp = x, s = 1;
 		while (s < tmp)
@@ -969,7 +965,7 @@ namespace std {
 		}
 		return res;
 	}
-	_NODISCARD const string to_string(const math::uint256_t& x) {
+	[[nodiscard]] const string to_string(const math::uint256_t& x) {
 		if (x == 0) return "0";
 		math::uint256_t tmp = x, s = 1;
 		while (s < tmp)
@@ -982,7 +978,7 @@ namespace std {
 		}
 		return res;
 	}
-	_NODISCARD const string to_string(const math::uint512_t& x) {
+	[[nodiscard]] const string to_string(const math::uint512_t& x) {
 		if (x == 0) return "0";
 		math::uint512_t tmp = x, s = 1;
 		while (s < tmp)
@@ -995,7 +991,7 @@ namespace std {
 		}
 		return res;
 	}
-	_NODISCARD const string to_string(const math::uint1024_t& x) {
+	[[nodiscard]] const string to_string(const math::uint1024_t& x) {
 		if (x == 0) return "0";
 		math::uint1024_t tmp = x, s = 1;
 		while (s < tmp)
