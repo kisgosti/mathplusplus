@@ -32,6 +32,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #pragma once
 
+#ifdef MATHPLUSPLUS_EXPORTS
+#define MATHPLUSPLUS_API _declspec(dllexport)
+#else
+#define MATHPLUSPLUS_API _declspec(dllimport)
+#endif // MATHPLUSPLUS_EXPORTS
+
 #include <iostream>
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -58,24 +64,24 @@ namespace math {
 		template<typename U>
 		constexpr complex(const complex<U>& x);
 
-		_NODISCARD constexpr inline const complex<T> comp() const;
-		_NODISCARD inline const T norm() const;
-		_NODISCARD inline const T snorm() const;
-		_NODISCARD inline const T arg() const;
-		_NODISCARD inline const T sarg() const;
+		[[nodiscard]] constexpr inline const complex<T> comp() const;
+		[[nodiscard]] inline const T norm() const;
+		[[nodiscard]] inline const T snorm() const;
+		[[nodiscard]] inline const T arg() const;
+		[[nodiscard]] inline const T sarg() const;
 
 		template<typename U>
-		_NODISCARD constexpr inline const bool operator==(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const bool operator==(const complex<U>& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const bool operator!=(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const bool operator!=(const complex<U>& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const bool operator<(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const bool operator<(const complex<U>& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const bool operator>(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const bool operator>(const complex<U>& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const bool operator<=(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const bool operator<=(const complex<U>& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const bool operator>=(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const bool operator>=(const complex<U>& x) const;
 
 		template<typename U>
 		constexpr inline complex<T>& operator=(const U& x);
@@ -99,31 +105,31 @@ namespace math {
 		constexpr inline complex<T>& operator/=(const complex<U>& x);
 
 		template<typename U>
-		_NODISCARD constexpr inline const auto operator+(const U& x) const;
+		[[nodiscard]] constexpr inline const auto operator+(const U& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const auto operator+(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const auto operator+(const complex<U>& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const auto operator-(const U& x) const;
+		[[nodiscard]] constexpr inline const auto operator-(const U& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const auto operator-(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const auto operator-(const complex<U>& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const auto operator*(const U& x) const;
+		[[nodiscard]] constexpr inline const auto operator*(const U& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const auto operator*(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const auto operator*(const complex<U>& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const auto operator/(const U& x) const;
+		[[nodiscard]] constexpr inline const auto operator/(const U& x) const;
 		template<typename U>
-		_NODISCARD constexpr inline const auto operator/(const complex<U>& x) const;
+		[[nodiscard]] constexpr inline const auto operator/(const complex<U>& x) const;
 	};
 
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const auto operator+(const T& x, const complex<U>& y);
+	[[nodiscard]] constexpr inline const auto operator+(const T& x, const complex<U>& y);
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const auto operator-(const T& x, const complex<U>& y);
+	[[nodiscard]] constexpr inline const auto operator-(const T& x, const complex<U>& y);
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const auto operator*(const T& x, const complex<U>& y);
+	[[nodiscard]] constexpr inline const auto operator*(const T& x, const complex<U>& y);
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const auto operator/(const T& x, const complex<U>& y);
+	[[nodiscard]] constexpr inline const auto operator/(const T& x, const complex<U>& y);
 
 	template<typename T>
 	struct cxType {
@@ -136,22 +142,22 @@ namespace math {
 	};
 
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const complex<T> cxFromPolar(const T& r, const U& theta);
+	[[nodiscard]] constexpr inline const complex<T> cxFromPolar(const T& r, const U& theta);
 
 	template<typename T>
-	_NODISCARD constexpr inline const complex<T> cxSqrt(const complex<T>& x);
+	[[nodiscard]] constexpr inline const complex<T> cxSqrt(const complex<T>& x);
 
 	template<typename T>
-	_NODISCARD constexpr inline const complex<T> abs(const complex<T>& x);
+	[[nodiscard]] constexpr inline const complex<T> abs(const complex<T>& x);
 
 	template<typename T, typename U>
-	_NODISCARD constexpr inline const complex<T> cxPow(const complex<T>& b, const U& e);
+	[[nodiscard]] constexpr inline const complex<T> cxPow(const complex<T>& b, const U& e);
 }
 
 namespace std {
 
 	template<typename T>
-	_NODISCARD const string to_string(const math::complex<T>& x);
+	[[nodiscard]] const string to_string(const math::complex<T>& x);
 }
 
 template<typename T>
