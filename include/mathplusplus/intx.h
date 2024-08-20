@@ -239,16 +239,16 @@ namespace math {
 
 namespace std {
 
-	[[nodiscard]] const string to_string(const math::uint128_t& x);
-	[[nodiscard]] const string to_string(const math::uint256_t& x);
-	[[nodiscard]] const string to_string(const math::uint512_t& x);
-	[[nodiscard]] const string to_string(const math::uint1024_t& x);
+	MATHPLUSPLUS_API [[nodiscard]] const string to_string(const math::uint128_t& x);
+	MATHPLUSPLUS_API [[nodiscard]] const string to_string(const math::uint256_t& x);
+	MATHPLUSPLUS_API [[nodiscard]] const string to_string(const math::uint512_t& x);
+	MATHPLUSPLUS_API [[nodiscard]] const string to_string(const math::uint1024_t& x);
 }
 
-inline std::ostream& operator<<(std::ostream& os, const math::uint128_t& x);
-inline std::ostream& operator<<(std::ostream& os, const math::uint256_t& x);
-inline std::ostream& operator<<(std::ostream& os, const math::uint512_t& x);
-inline std::ostream& operator<<(std::ostream& os, const math::uint1024_t& x);
+MATHPLUSPLUS_API inline std::ostream& operator<<(std::ostream& os, const math::uint128_t& x);
+MATHPLUSPLUS_API inline std::ostream& operator<<(std::ostream& os, const math::uint256_t& x);
+MATHPLUSPLUS_API inline std::ostream& operator<<(std::ostream& os, const math::uint512_t& x);
+MATHPLUSPLUS_API inline std::ostream& operator<<(std::ostream& os, const math::uint1024_t& x);
 
 #undef	UINT128_MAX
 #define	UINT128_MAX			(static_cast<math::uint128_t>0 - 1)
