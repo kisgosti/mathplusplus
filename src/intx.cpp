@@ -34,6 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include <string>
 #include <stdint.h>
+#include <exception>
 
 namespace math {
 	
@@ -1004,6 +1005,40 @@ namespace std {
 		}
 		return res;
 	}
+}
+
+math::uint128_t operator ""_u128(const char* str, std::size_t len) {
+	math::uint128_t res = 0;
+	if (str[0] == '0') {
+		if (len == 1) return res;
+		if (str[1] == 'x') {
+			for (std::size_t i = 2; i < len; i++) {
+				if (str[i] >= '0' && str[i] <= '9') res = (res << 4) + (str[i] - '0');
+				else if (str[i] >= 'A' && str[i] <= 'F') res = (res << 4) + (str[i] - 'A' + 10);
+				else if (str[i] >= 'a' && str[i] <= 'f') res = (res << 4) + (str[i] - 'a' + 10);
+				else throw std::invalid_argument("Invalid hexadecimal digit");
+			}
+		}
+		else if (str[1] == 'b') {
+			for (std::size_t i = 2; i < len; i++) {
+				if (str[i] != '0' && str[i] != '1') throw std::invalid_argument("Invalid binary digit");
+				res = (res << 1) + (str[i] - '0');
+			}
+		}
+		else {
+			for (std::size_t i = 1; i < len; i++) {
+				if (str[i] < '0' || str[i] > '7') throw std::invalid_argument("Invalid octal digit");
+				res = (res << 3) + (str[i] - '0');
+			}
+		}
+	}
+	else {
+		for (std::size_t i = 0; i < len; i++) {
+			if (str[i] < '0' || str[i] > '9') throw std::invalid_argument("Invalid decimal digit");
+			res = (res * 10) + (str[i] - '0');
+		}
+	}
+	return res;
 }
 
 inline std::ostream& operator<<(std::ostream& os, const math::uint128_t& x) {
