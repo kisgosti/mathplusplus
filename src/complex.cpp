@@ -63,20 +63,16 @@ namespace math {
 		return complex<T>(re, -1 * im);
 	}
 	template<typename T>
-	[[nodiscard]] inline const T complex<T>::norm() const {
-		return sqrt(abs(re) * abs(re) + abs(im) * abs(im));
+	[[nodiscard]] inline const auto complex<T>::norm() const {
+		return sqrt(re * re + im * im);
 	}
 	template<typename T>
-	[[nodiscard]] inline const T complex<T>::snorm() const {
-		return im == 0 ? abs(re) * re : (*this).norm() * sgn(im);
+	[[nodiscard]] inline const auto complex<T>::snorm() const {
+		return im == 0 ? abs(re) * re : norm() * sgn(im);
 	}
 	template<typename T>
-	[[nodiscard]] inline const T complex<T>::arg() const {
-		return im == 0 ? re == 0 ? 0 : M_PI * (1 - sgn(re)) / 2 : re == 0 ? M_PI_2 * (2 - sgn(im)) : M_PI * ((2 - sgn(im) * (sgn(re) + 1)) / 2) + sgn(re) * sgn(im) * atan2(abs(im), abs(re));
-	}
-	template<typename T>
-	[[nodiscard]] inline const T complex<T>::sarg() const {
-		return im == 0 ? ((1 - sgn(re)) / 2) * M_PI : M_PI * ((1 - sgn(re) * sgn(im)) / 2) + sgn(re) * sgn(im) * atan2(abs(im), abs(re));
+	[[nodiscard]] inline const auto complex<T>::arg() const {
+		return im == 0 ? re < 0 ? M_PI : 0 : re == 0 ? M_PI_2 * (2 - sgn(im)) : atan2(im, re);
 	}
 
 	template<typename T>
@@ -92,7 +88,7 @@ namespace math {
 	template<typename T>
 	template<typename U>
 	[[nodiscard]] constexpr inline const bool complex<T>::operator<(const complex<U>& x) const {
-		return (*this).snorm() == x.snorm() ? sarg() < x.sarg() : snorm() < x.snorm();
+		return snorm() == x.snorm() ? arg() < x.arg() : snorm() < x.snorm();
 	}
 	template<typename T>
 	template<typename U>
@@ -264,25 +260,140 @@ namespace math {
 	}
 
 	template<typename T, typename U>
-	[[nodiscard]] constexpr inline const complex<T> cxFromPolar(const T& r, const U& theta) {
+	[[nodiscard]] constexpr inline const auto cxFromPolar(const T& r, const U& theta) {
 		complex<T> res(r * cos(theta), r * sin(theta));
 		return res;
 	}
 
 	template<typename T>
-	[[nodiscard]] constexpr inline const complex<T> cxSqrt(const complex<T>& x) {
+	[[nodiscard]] constexpr inline const auto cxSqrt(const complex<T>& x) {
 		return cxFromPolar(sqrt(x.norm()), x.arg() / 2);
 	}
 
 	template<typename T>
-	[[nodiscard]] constexpr inline const complex<T> abs(const complex<T>& x) {
+	[[nodiscard]] constexpr inline const auto cxCbrt(const complex<T>& x) {
+		return cxFromPolar(cbrt(x.norm()), x.arg() / 3);
+	}
+
+	template<typename T>
+	[[nodiscard]] constexpr inline const auto abs(const complex<T>& x) {
 		return x.norm();
 	}
 
 	template<typename T, typename U>
-	[[nodiscard]] constexpr inline const complex<T> cxPow(const complex<T>& b, const U& e) {
+	[[nodiscard]] constexpr inline const auto cxPow(const complex<T>& b, const U& e) {
 		return cxFromPolar(pow(b.norm(), e), b.arg() * e);
 	}
+
+	template<typename T, typename U>
+	[[nodiscard]] constexpr inline const auto cxPow(const T& b, const complex<U>& e) {
+		return complex<U>(cos(e.im), sin(e.im)) * pow(b, e.re);
+	}
+
+	template<typename T, typename U>
+	[[nodiscard]] constexpr inline const auto cxPow(const complex<T>& b, const complex<U>& e) {
+		return complex<U>(cos(e.im), sin(e.im)) * cxPow(b, e.re);
+	}
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto sqrt(const math::complex<T>& x) {
+	return math::cxSqrt(x);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto cbrt(const math::complex<T>& x) {
+	return math::cxCbrt(x);
+}
+
+template<typename T, typename U>
+[[nodiscard]] constexpr inline const auto pow(const math::complex<T>& b, const U& e) {
+	return math::cxPow(b, e);
+}
+
+template<typename T, typename U>
+[[nodiscard]] constexpr inline const auto pow(const T& b, const math::complex<U>& e) {
+	return math::cxPow(b, e);
+}
+
+template<typename T, typename U>
+[[nodiscard]] constexpr inline const auto pow(const math::complex<T>& b, const math::complex<U>& e) {
+	return math::cxPow(b, e);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto log(const math::complex<T>& x) {
+	return log(x.norm()) + math::complex<T>::i * x.arg();
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto log2(const math::complex<T>& x) {
+	return log(x) / log(2);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto log10(const math::complex<T>& x) {
+	return log(x) / log(10);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto sin(const math::complex<T>& x) {
+	return sin(x.re) * cosh(x.im) + math::complex<T>::i * cos(x.re) * sinh(x.im);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto cos(const math::complex<T>& x) {
+	return cos(x.re) * cosh(x.im) - math::complex<T>::i * sin(x.re) * sinh(x.im);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto tan(const math::complex<T>& x) {
+	return sin(x) / cos(x);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto asin(const math::complex<T>& x) {
+	return -math::complex<T>::i * log(math::complex<T>::i * x + math::cxSqrt(1 - x * x));
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto acos(const math::complex<T>& x) {
+	return -math::complex<T>::i * log(x + math::cxSqrt(x * x - 1));
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto atan(const math::complex<T>& x) {
+	return -0.5 * math::complex<T>::i * (log(math::complex<T>::i - x) - log(math::complex<T>::i + x));
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto sinh(const math::complex<T>& x) {
+	return sinh(x.re) * cos(x.im) + math::complex<T>::i * cosh(x.re) * sin(x.im);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto cosh(const math::complex<T>& x) {
+	return cosh(x.re) * cos(x.im) + math::complex<T>::i * sinh(x.re) * sin(x.im);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto tanh(const math::complex<T>& x) {
+	return sinh(x) / cosh(x);
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto asinh(const math::complex<T>& x) {
+	return log(x * math::cxSqrt(x * x + 1));
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto acosh(const math::complex<T>& x) {
+	return log(x + math::cxSqrt(x * x - 1));
+}
+
+template<typename T>
+[[nodiscard]] constexpr inline const auto atanh(const math::complex<T>& x) {
+	return 0.5 * (log(1 + x) - log(1 - x));
 }
 
 namespace std {
