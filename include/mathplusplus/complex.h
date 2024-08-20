@@ -45,13 +45,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 namespace math {
 
-	class bad_complex_init_list : public std::runtime_error {
+	class MATHPLUSPLUS_API bad_complex_init_list : public std::runtime_error {
 	public:
 		bad_complex_init_list();
 	};
 
 	template<typename T>
-	class complex {
+	class MATHPLUSPLUS_API complex {
 	public:
 		T re, im;
 		constexpr complex();
@@ -65,10 +65,9 @@ namespace math {
 		constexpr complex(const complex<U>& x);
 
 		[[nodiscard]] constexpr inline const complex<T> comp() const;
-		[[nodiscard]] inline const T norm() const;
-		[[nodiscard]] inline const T snorm() const;
-		[[nodiscard]] inline const T arg() const;
-		[[nodiscard]] inline const T sarg() const;
+		[[nodiscard]] inline const auto norm() const;
+		[[nodiscard]] inline const auto snorm() const;
+		[[nodiscard]] inline const auto arg() const;
 
 		template<typename U>
 		[[nodiscard]] constexpr inline const bool operator==(const complex<U>& x) const;
@@ -120,45 +119,116 @@ namespace math {
 		[[nodiscard]] constexpr inline const auto operator/(const U& x) const;
 		template<typename U>
 		[[nodiscard]] constexpr inline const auto operator/(const complex<U>& x) const;
+
+		constexpr static const complex<T> i = complex<T>(0, 1);
 	};
 
 	template<typename T, typename U>
-	[[nodiscard]] constexpr inline const auto operator+(const T& x, const complex<U>& y);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto operator+(const T& x, const complex<U>& y);
 	template<typename T, typename U>
-	[[nodiscard]] constexpr inline const auto operator-(const T& x, const complex<U>& y);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto operator-(const T& x, const complex<U>& y);
 	template<typename T, typename U>
-	[[nodiscard]] constexpr inline const auto operator*(const T& x, const complex<U>& y);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto operator*(const T& x, const complex<U>& y);
 	template<typename T, typename U>
-	[[nodiscard]] constexpr inline const auto operator/(const T& x, const complex<U>& y);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto operator/(const T& x, const complex<U>& y);
 
 	template<typename T>
-	struct cxType {
+	struct MATHPLUSPLUS_API cxType {
 		using type = complex<T>;
 	};
 
 	template<typename T>
-	struct cxType<complex<T>> {
+	struct MATHPLUSPLUS_API cxType<complex<T>> {
 		using type = complex<T>;
 	};
 
 	template<typename T, typename U>
-	[[nodiscard]] constexpr inline const complex<T> cxFromPolar(const T& r, const U& theta);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const complex<T> cxFromPolar(const T& r, const U& theta);
 
 	template<typename T>
-	[[nodiscard]] constexpr inline const complex<T> cxSqrt(const complex<T>& x);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const complex<T> cxSqrt(const complex<T>& x);
 
 	template<typename T>
-	[[nodiscard]] constexpr inline const complex<T> abs(const complex<T>& x);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const complex<T> cxCbrt(const complex<T>& x);
+
+	template<typename T>
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const complex<T> abs(const complex<T>& x);
 
 	template<typename T, typename U>
-	[[nodiscard]] constexpr inline const complex<T> cxPow(const complex<T>& b, const U& e);
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto cxPow(const complex<T>& b, const U& e);
+
+	template<typename T, typename U>
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto cxPow(const T& b, const complex<U>& e);
+
+	template<typename T, typename U>
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto cxPow(const complex<T>& b, const complex<U>& e);
 }
+
+template<typename T, typename U>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto sqrt(const math::complex<T>& x);
+
+template<typename T, typename U>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto cbrt(const math::complex<T>& x);
+
+template<typename T, typename U>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto pow(const math::complex<T>& b, const U& e);
+
+template<typename T, typename U>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto pow(const T& b, const math::complex<U>& e);
+
+template<typename T, typename U>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto pow(const math::complex<T>& b, const math::complex<U>& e);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto log(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto log2(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto log10(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto sin(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto cos(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto tan(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto asin(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto acos(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto atan(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto sinh(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto cosh(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto tanh(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto asinh(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto acosh(const math::complex<T>& b);
+
+template<typename T>
+MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto atanh(const math::complex<T>& b);
 
 namespace std {
 
 	template<typename T>
-	[[nodiscard]] const string to_string(const math::complex<T>& x);
+	MATHPLUSPLUS_API [[nodiscard]] const string to_string(const math::complex<T>& x);
 }
 
 template<typename T>
-inline std::ostream& operator<<(std::ostream& os, const math::complex<T>& x);
+MATHPLUSPLUS_API inline std::ostream& operator<<(std::ostream& os, const math::complex<T>& x);
