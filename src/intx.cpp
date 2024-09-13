@@ -38,74 +38,76 @@ POSSIBILITY OF SUCH DAMAGE.
 
 namespace math {
 	
-	[[nodiscard]] constexpr inline const uint32_t uint128_t::operator[](int16_t n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint32_t uint128_t::operator[](int16_t n) const {
 		return 0 <= n && n < 4 ? buf[n] : 0;
 	}
-	constexpr uint128_t::uint128_t() : buf({ 0 }) {}
-	constexpr uint128_t::uint128_t(const uint64_t& x) : buf{ 0, 0, static_cast<uint32_t>(x >> 32), static_cast<uint32_t>(x) } {}
-	constexpr uint128_t::uint128_t(const uint128_t& x) : buf(x.buf) {}
 
-	[[nodiscard]] constexpr inline const bool uint128_t::operator==(const uint128_t& x) const {
+	MATHPLUSPLUS_API constexpr uint128_t::uint128_t() : buf({ 0 }) {}
+	MATHPLUSPLUS_API constexpr uint128_t::uint128_t(const uint64_t& x) : buf{ 0, 0, static_cast<uint32_t>(x >> 32), static_cast<uint32_t>(x) } {}
+	MATHPLUSPLUS_API constexpr uint128_t::uint128_t(const uint128_t& x) : buf(x.buf) {}
+
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint128_t::operator==(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return false;
 		return true;
 	}
-	[[nodiscard]] constexpr inline const bool uint128_t::operator!=(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint128_t::operator!=(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return true;
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint128_t::operator<(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint128_t::operator<(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint128_t::operator>(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint128_t::operator>(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint128_t::operator<=(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint128_t::operator<=(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return true;
 	}
-	[[nodiscard]] constexpr inline const bool uint128_t::operator>=(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint128_t::operator>=(const uint128_t& x) const {
 		for (short i = 0; i < 4; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return true;
 	}
-	constexpr inline uint128_t& uint128_t::operator=(const uint128_t& x) {
+
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator=(const uint128_t& x) {
 		for (short i = 0; i < 4; i++)
 			buf[i] = x[i];
 		return *this;
 	}
-	constexpr inline uint128_t& uint128_t::operator|=(const uint128_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator|=(const uint128_t& x) {
 		for (short i = 0; i < 4; i++)
 			buf[i] |= x[i];
 		return *this;
 	}
-	constexpr inline uint128_t& uint128_t::operator^=(const uint128_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator^=(const uint128_t& x) {
 		for (short i = 0; i < 4; i++)
 			buf[i] ^= x[i];
 		return *this;
 	}
-	constexpr inline uint128_t& uint128_t::operator&=(const uint128_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator&=(const uint128_t& x) {
 		for (short i = 0; i < 4; i++)
 			buf[i] &= x[i];
 		return *this;
 	}
-	constexpr inline uint128_t& uint128_t::operator>>=(const int& n) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator>>=(const int& n) {
 		for (short i = 0; i < 4; i++)
 			buf[i] = (buf[i - (n >> 3)] >> (n % 8)) | (buf[i + 1 - (n >> 3)] << (8 - (n % 8)));
 		return *this;
 	}
-	constexpr inline uint128_t& uint128_t::operator<<=(const int& n) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator<<=(const int& n) {
 		for (short i = 0; i < 4; i++)
 			buf[i] = (buf[i + (n >> 3)] << (n % 8)) | (buf[i + 1 + (n >> 3)] >> (8 - (n % 8)));
 		return *this;
 	}
-	constexpr inline uint128_t& uint128_t::operator+=(const uint128_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator+=(const uint128_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 3; i >= 0; i--) {
 			tmp += buf[i] + x[i];
@@ -114,7 +116,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint128_t& uint128_t::operator-=(const uint128_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator-=(const uint128_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 3; i >= 0; i--) {
 			tmp = tmp + 0xffffffff + buf[i] - x[i];
@@ -123,7 +125,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint128_t& uint128_t::operator*=(const uint128_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator*=(const uint128_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 3; i >= 0; i--) {
 			for (short j = 0; j <= i; j++)
@@ -133,7 +135,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint128_t& uint128_t::operator/=(const uint128_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator/=(const uint128_t& x) {
 		uint128_t res, one = 1;
 		int16_t s = 0, m = 63, e = 127;
 		while (e > 0) {
@@ -162,7 +164,7 @@ namespace math {
 		}
 		return *this = res;
 	}
-	constexpr inline uint128_t& uint128_t::operator%=(const uint128_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint128_t& uint128_t::operator%=(const uint128_t& x) {
 		uint128_t res, one = 1;
 		int16_t s = 0, m = 63, e = 127;
 		while (e > 0) {
@@ -193,136 +195,137 @@ namespace math {
 		return *this -= res;
 	}
 
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator|(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator|(const uint128_t& x) const {
 		uint128_t res(*this);
 		res |= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator^(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator^(const uint128_t& x) const {
 		uint128_t res(*this);
 		res ^= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator&(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator&(const uint128_t& x) const {
 		uint128_t res(*this);
 		res &= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator>>(const int& n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator>>(const int& n) const {
 		uint128_t res(*this);
 		res >>= n;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator<<(const int& n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator<<(const int& n) const {
 		uint128_t res(*this);
 		res <<= n;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator+(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator+(const uint128_t& x) const {
 		uint128_t res(*this);
 		res += x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator-(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator-(const uint128_t& x) const {
 		uint128_t res(*this);
 		res -= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator*(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator*(const uint128_t& x) const {
 		uint128_t res(*this);
 		res *= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator/(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator/(const uint128_t& x) const {
 		uint128_t res(*this);
 		res /= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint128_t uint128_t::operator%(const uint128_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t uint128_t::operator%(const uint128_t& x) const {
 		uint128_t res(*this);
 		res %= x;
 		return res;
 	}
 
-	[[nodiscard]] uint128_t::operator uint64_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint128_t::operator uint64_t() const {
 		return ((uint64_t)buf[2] << 32) | buf[3];
 	}
-	[[nodiscard]] uint128_t::operator uint32_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint128_t::operator uint32_t() const {
 		return buf[3];
 	}
 
-	[[nodiscard]] constexpr inline const uint32_t uint256_t::operator[](int16_t n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint32_t uint256_t::operator[](int16_t n) const {
 		return 0 <= n && n < 8 ? buf[n] : 0;
 	}
-	constexpr uint256_t::uint256_t() : buf({ 0 }) {}
-	constexpr uint256_t::uint256_t(const uint64_t& x) : buf{ 0, 0, 0, 0, 0, 0, static_cast<uint32_t>(x >> 32), static_cast<uint32_t>(x) } {}
-	constexpr uint256_t::uint256_t(const uint128_t& x) : buf({ 0 }) {
+
+	MATHPLUSPLUS_API constexpr uint256_t::uint256_t() : buf({ 0 }) {}
+	MATHPLUSPLUS_API constexpr uint256_t::uint256_t(const uint64_t& x) : buf{ 0, 0, 0, 0, 0, 0, static_cast<uint32_t>(x >> 32), static_cast<uint32_t>(x) } {}
+	MATHPLUSPLUS_API constexpr uint256_t::uint256_t(const uint128_t& x) : buf({ 0 }) {
 		for (short i = 0; i < 4; i++)
 			buf[4 + i] = x[i];
 	}
-	constexpr uint256_t::uint256_t(const uint256_t& x) : buf(x.buf) {}
+	MATHPLUSPLUS_API constexpr uint256_t::uint256_t(const uint256_t& x) : buf(x.buf) {}
 
-	[[nodiscard]] constexpr inline const bool uint256_t::operator==(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint256_t::operator==(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return false;
 		return true;
 	}
-	[[nodiscard]] constexpr inline const bool uint256_t::operator!=(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint256_t::operator!=(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return true;
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint256_t::operator<(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint256_t::operator<(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint256_t::operator>(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint256_t::operator>(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint256_t::operator<=(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint256_t::operator<=(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return true;
 	}
-	[[nodiscard]] constexpr inline const bool uint256_t::operator>=(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint256_t::operator>=(const uint256_t& x) const {
 		for (short i = 0; i < 8; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return true;
 	}
 
-	constexpr inline uint256_t& uint256_t::operator=(const uint256_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator=(const uint256_t& x) {
 		buf = x.buf;
 		return *this;
 	}
-	constexpr inline uint256_t& uint256_t::operator|=(const uint256_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator|=(const uint256_t& x) {
 		for (short i = 0; i < 8; i++)
 			buf[i] |= x[i];
 		return *this;
 	}
-	constexpr inline uint256_t& uint256_t::operator^=(const uint256_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator^=(const uint256_t& x) {
 		for (short i = 0; i < 8; i++)
 			buf[i] ^= x[i];
 		return *this;
 	}
-	constexpr inline uint256_t& uint256_t::operator&=(const uint256_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator&=(const uint256_t& x) {
 		for (short i = 0; i < 8; i++)
 			buf[i] &= x[i];
 		return *this;
 	}
-	constexpr inline uint256_t& uint256_t::operator>>=(const int& n) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator>>=(const int& n) {
 		for (short i = 0; i < 8; i++)
 			buf[i] = (buf[i - (n >> 3)] >> (n % 8)) | (buf[i + 1 - (n >> 3)] << (8 - (n % 8)));
 		return *this;
 	}
-	constexpr inline uint256_t& uint256_t::operator<<=(const int& n) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator<<=(const int& n) {
 		for (short i = 0; i < 8; i++)
 			buf[i] = (buf[i + (n >> 3)] << (n % 8)) | (buf[i + 1 + (n >> 3)] >> (8 - (n % 8)));
 		return *this;
 	}
-	constexpr inline uint256_t& uint256_t::operator+=(const uint256_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator+=(const uint256_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 7; i >= 0; i--) {
 			tmp += buf[i] + x[i];
@@ -331,7 +334,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint256_t& uint256_t::operator-=(const uint256_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator-=(const uint256_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 7; i >= 0; i--) {
 			tmp = tmp + 0xffffffff + buf[i] - x[i];
@@ -340,7 +343,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint256_t& uint256_t::operator*=(const uint256_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator*=(const uint256_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 7; i >= 0; i--) {
 			for (short j = 0; j <= i; j++)
@@ -350,7 +353,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint256_t& uint256_t::operator/=(const uint256_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator/=(const uint256_t& x) {
 		uint256_t res, one = 1;
 		int16_t s = 0, m = 127, e = 255;
 		while (e > 0) {
@@ -379,7 +382,7 @@ namespace math {
 		}
 		return *this = res;
 	}
-	constexpr inline uint256_t& uint256_t::operator%=(const uint256_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint256_t& uint256_t::operator%=(const uint256_t& x) {
 		uint256_t res, one = 1;
 		int16_t s = 0, m = 127, e = 255;
 		while (e > 0) {
@@ -410,146 +413,147 @@ namespace math {
 		return *this -= res;
 	}
 
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator|(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator|(const uint256_t& x) const {
 		uint256_t res(*this);
 		res |= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator^(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator^(const uint256_t& x) const {
 		uint256_t res(*this);
 		res ^= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator&(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator&(const uint256_t& x) const {
 		uint256_t res(*this);
 		res &= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator>>(const int& n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator>>(const int& n) const {
 		uint256_t res(*this);
 		res >>= n;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator<<(const int& n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator<<(const int& n) const {
 		uint256_t res(*this);
 		res <<= n;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator+(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator+(const uint256_t& x) const {
 		uint256_t res(*this);
 		res += x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator-(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator-(const uint256_t& x) const {
 		uint256_t res(*this);
 		res -= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator*(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator*(const uint256_t& x) const {
 		uint256_t res(*this);
 		res *= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator/(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator/(const uint256_t& x) const {
 		uint256_t res(*this);
 		res /= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint256_t uint256_t::operator%(const uint256_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t uint256_t::operator%(const uint256_t& x) const {
 		uint256_t res(*this);
 		res %= x;
 		return res;
 	}
 
-	[[nodiscard]] uint256_t::operator uint128_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint256_t::operator uint128_t() const {
 		uint128_t res;
 		for (short i = 0; i < 4; i++)
 			res.buf[i] = buf[i + 4];
 		return res;
 	}
-	[[nodiscard]] uint256_t::operator uint64_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint256_t::operator uint64_t() const {
 		return ((uint64_t)buf[6] << 32) | buf[7];
 	}
-	[[nodiscard]] uint256_t::operator uint32_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint256_t::operator uint32_t() const {
 		return buf[7];
 	}
 
-	[[nodiscard]] constexpr inline const uint32_t  uint512_t::operator[](int16_t n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint32_t  uint512_t::operator[](int16_t n) const {
 		return 0 <= n && n < 16 ? buf[n] : 0;
 	}
-	constexpr uint512_t::uint512_t() : buf({ 0 }) {}
-	constexpr uint512_t::uint512_t(const uint64_t& x) : buf{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, static_cast<uint32_t>(x >> 32), static_cast<uint32_t>(x) } {}
-	constexpr uint512_t::uint512_t(const uint128_t& x) : buf({ 0 }) {
+
+	MATHPLUSPLUS_API constexpr uint512_t::uint512_t() : buf({ 0 }) {}
+	MATHPLUSPLUS_API constexpr uint512_t::uint512_t(const uint64_t& x) : buf{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, static_cast<uint32_t>(x >> 32), static_cast<uint32_t>(x) } {}
+	MATHPLUSPLUS_API constexpr uint512_t::uint512_t(const uint128_t& x) : buf({ 0 }) {
 		for (short i = 0; i < 4; i++)
 			buf[12 + i] = x[i];
 	}
-	constexpr uint512_t::uint512_t(const uint256_t& x) : buf({ 0 }) {
+	MATHPLUSPLUS_API constexpr uint512_t::uint512_t(const uint256_t& x) : buf({ 0 }) {
 		for (short i = 0; i < 8; i++)
 			buf[8 + i] = x[i];
 	}
-	constexpr uint512_t::uint512_t(const uint512_t& x) : buf(x.buf) {}
+	MATHPLUSPLUS_API constexpr uint512_t::uint512_t(const uint512_t& x) : buf(x.buf) {}
 
-	[[nodiscard]] constexpr inline const bool uint512_t::operator==(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint512_t::operator==(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return false;
 		return true;
 	}
-	[[nodiscard]] constexpr inline const bool uint512_t::operator!=(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint512_t::operator!=(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return true;
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint512_t::operator<(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint512_t::operator<(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint512_t::operator>(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint512_t::operator>(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint512_t::operator<=(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint512_t::operator<=(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return true;
 	}
-	[[nodiscard]] constexpr inline const bool uint512_t::operator>=(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint512_t::operator>=(const uint512_t& x) const {
 		for (short i = 0; i < 16; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return true;
 	}
 
-	constexpr inline uint512_t& uint512_t::operator=(const uint512_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator=(const uint512_t& x) {
 		buf = x.buf;
 		return *this;
 	}
-	constexpr inline uint512_t& uint512_t::operator|=(const uint512_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator|=(const uint512_t& x) {
 		for (short i = 0; i < 16; i++)
 			buf[i] |= x[i];
 		return *this;
 	}
-	constexpr inline uint512_t& uint512_t::operator^=(const uint512_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator^=(const uint512_t& x) {
 		for (short i = 0; i < 16; i++)
 			buf[i] ^= x[i];
 		return *this;
 	}
-	constexpr inline uint512_t& uint512_t::operator&=(const uint512_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator&=(const uint512_t& x) {
 		for (short i = 0; i < 16; i++)
 			buf[i] &= x[i];
 		return *this;
 	}
-	constexpr inline uint512_t& uint512_t::operator>>=(const int& n) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator>>=(const int& n) {
 		for (short i = 0; i < 16; i++)
 			buf[i] = (buf[i - (n >> 3)] >> (n % 8)) | (buf[i + 1 - (n >> 3)] << (8 - (n % 8)));
 		return *this;
 	}
-	constexpr inline uint512_t& uint512_t::operator<<=(const int& n) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator<<=(const int& n) {
 		for (short i = 0; i < 16; i++)
 			buf[i] = (buf[i + (n >> 3)] << (n % 8)) | (buf[i + 1 + (n >> 3)] >> (8 - (n % 8)));
 		return *this;
 	}
-	constexpr inline uint512_t& uint512_t::operator+=(const uint512_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator+=(const uint512_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 15; i >= 0; i--) {
 			tmp += buf[i] + x[i];
@@ -558,7 +562,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint512_t& uint512_t::operator-=(const uint512_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator-=(const uint512_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 15; i >= 0; i--) {
 			tmp = tmp + 0xffffffff + buf[i] - x[i];
@@ -567,7 +571,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint512_t& uint512_t::operator*=(const uint512_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator*=(const uint512_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 15; i >= 0; i--) {
 			for (short j = 0; j <= i; j++)
@@ -577,7 +581,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint512_t& uint512_t::operator/=(const uint512_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator/=(const uint512_t& x) {
 		uint512_t res, one = 1;
 		int16_t s = 0, m = 255, e = 511;
 		while (e > 0) {
@@ -606,7 +610,7 @@ namespace math {
 		}
 		return *this = res;
 	}
-	constexpr inline uint512_t& uint512_t::operator%=(const uint512_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint512_t& uint512_t::operator%=(const uint512_t& x) {
 		uint512_t res, one = 1;
 		int16_t s = 0, m = 255, e = 511;
 		while (e > 0) {
@@ -637,156 +641,157 @@ namespace math {
 		return *this -= res;
 	}
 
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator|(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator|(const uint512_t& x) const {
 		uint512_t res(*this);
 		res |= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator^(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator^(const uint512_t& x) const {
 		uint512_t res(*this);
 		res ^= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator&(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator&(const uint512_t& x) const {
 		uint512_t res(*this);
 		res &= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator>>(const int& n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator>>(const int& n) const {
 		uint512_t res(*this);
 		res >>= n;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator<<(const int& n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator<<(const int& n) const {
 		uint512_t res(*this);
 		res <<= n;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator+(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator+(const uint512_t& x) const {
 		uint512_t res(*this);
 		res += x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator-(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator-(const uint512_t& x) const {
 		uint512_t res(*this);
 		res -= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator*(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator*(const uint512_t& x) const {
 		uint512_t res(*this);
 		res *= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator/(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator/(const uint512_t& x) const {
 		uint512_t res(*this);
 		res /= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint512_t uint512_t::operator%(const uint512_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t uint512_t::operator%(const uint512_t& x) const {
 		uint512_t res(*this);
 		res %= x;
 		return res;
 	}
 
-	[[nodiscard]] uint512_t::operator uint256_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint512_t::operator uint256_t() const {
 		uint256_t res;
 		for (short i = 0; i < 8; i++)
 			res.buf[i] = buf[i + 8];
 		return res;
 	}
-	[[nodiscard]] uint512_t::operator uint128_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint512_t::operator uint128_t() const {
 		uint128_t res;
 		for (short i = 0; i < 4; i++)
 			res.buf[i] = buf[i + 12];
 		return res;
 	}
-	[[nodiscard]] uint512_t::operator uint64_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint512_t::operator uint64_t() const {
 		return ((uint64_t)buf[14] << 32) | buf[15];
 	}
-	[[nodiscard]] uint512_t::operator uint32_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint512_t::operator uint32_t() const {
 		return buf[15];
 	}
 
-	[[nodiscard]] constexpr inline const uint32_t uint1024_t::operator[](int16_t n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint32_t uint1024_t::operator[](int16_t n) const {
 		return 0 <= n && n < 32 ? buf[n] : 0;
 	}
-	constexpr uint1024_t::uint1024_t() : buf({ 0 }) {}
-	constexpr uint1024_t::uint1024_t(const uint64_t& x) : buf{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, static_cast<uint32_t>(x >> 32), static_cast<uint32_t>(x) } {}
-	constexpr uint1024_t::uint1024_t(const uint128_t& x) : buf({ 0 }) {
+
+	MATHPLUSPLUS_API constexpr uint1024_t::uint1024_t() : buf({ 0 }) {}
+	MATHPLUSPLUS_API constexpr uint1024_t::uint1024_t(const uint64_t& x) : buf{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, static_cast<uint32_t>(x >> 32), static_cast<uint32_t>(x) } {}
+	MATHPLUSPLUS_API constexpr uint1024_t::uint1024_t(const uint128_t& x) : buf({ 0 }) {
 		for (short i = 0; i < 4; i++)
 			buf[28 + i] = x[i];
 	}
-	constexpr uint1024_t::uint1024_t(const uint256_t& x) : buf({ 0 }) {
+	MATHPLUSPLUS_API constexpr uint1024_t::uint1024_t(const uint256_t& x) : buf({ 0 }) {
 		for (short i = 0; i < 8; i++)
 			buf[24 + i] = x[i];
 	}
-	constexpr uint1024_t::uint1024_t(const uint512_t& x) : buf({ 0 }) {
+	MATHPLUSPLUS_API constexpr uint1024_t::uint1024_t(const uint512_t& x) : buf({ 0 }) {
 		for (short i = 0; i < 16; i++)
 			buf[16 + i] = x[i];
 	}
-	constexpr uint1024_t::uint1024_t(const uint1024_t& x) : buf(x.buf) {}
+	MATHPLUSPLUS_API constexpr uint1024_t::uint1024_t(const uint1024_t& x) : buf(x.buf) {}
 
-	[[nodiscard]] constexpr inline const bool uint1024_t::operator==(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint1024_t::operator==(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return false;
 		return true;
 	}
-	[[nodiscard]] constexpr inline const bool uint1024_t::operator!=(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint1024_t::operator!=(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return true;
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint1024_t::operator<(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint1024_t::operator<(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint1024_t::operator>(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint1024_t::operator>(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return false;
 	}
-	[[nodiscard]] constexpr inline const bool uint1024_t::operator<=(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint1024_t::operator<=(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return buf[i] < x[i];
 		return true;
 	}
-	[[nodiscard]] constexpr inline const bool uint1024_t::operator>=(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool uint1024_t::operator>=(const uint1024_t& x) const {
 		for (short i = 0; i < 32; i++)
 			if (buf[i] != x[i]) return buf[i] > x[i];
 		return true;
 	}
 
-	constexpr inline uint1024_t& uint1024_t::operator=(const uint1024_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator=(const uint1024_t& x) {
 		buf = x.buf;
 		return *this;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator|=(const uint1024_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator|=(const uint1024_t& x) {
 		for (short i = 0; i < 32; i++)
 			buf[i] |= x[i];
 		return *this;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator^=(const uint1024_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator^=(const uint1024_t& x) {
 		for (short i = 0; i < 32; i++)
 			buf[i] ^= x[i];
 		return *this;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator&=(const uint1024_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator&=(const uint1024_t& x) {
 		for (short i = 0; i < 32; i++)
 			buf[i] &= x[i];
 		return *this;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator>>=(const int& n) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator>>=(const int& n) {
 		for (short i = 0; i < 32; i++)
 			buf[i] = (buf[i - (n >> 3)] >> (n % 8)) | (buf[i + 1 - (n >> 3)] << (8 - (n % 8)));
 		return *this;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator<<=(const int& n) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator<<=(const int& n) {
 		for (short i = 0; i < 32; i++)
 			buf[i] = (buf[i + (n >> 3)] << (n % 8)) | (buf[i + 1 + (n >> 3)] >> (8 - (n % 8)));
 		return *this;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator+=(const uint1024_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator+=(const uint1024_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 31; i >= 0; i--) {
 			tmp += buf[i] + x[i];
@@ -795,7 +800,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator-=(const uint1024_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator-=(const uint1024_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 31; i >= 0; i--) {
 			tmp = tmp + 0xffffffff + buf[i] - x[i];
@@ -804,7 +809,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator*=(const uint1024_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator*=(const uint1024_t& x) {
 		uint64_t tmp = 0;
 		for (short i = 31; i >= 0; i--) {
 			for (short j = 0; j <= i; j++)
@@ -814,7 +819,7 @@ namespace math {
 		}
 		return *this;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator/=(const uint1024_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator/=(const uint1024_t& x) {
 		uint1024_t res, one = 1;
 		int16_t s = 0, m = 511, e = 1023;
 		while (e > 0) {
@@ -843,7 +848,7 @@ namespace math {
 		}
 		return *this = res;
 	}
-	constexpr inline uint1024_t& uint1024_t::operator%=(const uint1024_t& x) {
+	MATHPLUSPLUS_API constexpr inline uint1024_t& uint1024_t::operator%=(const uint1024_t& x) {
 		uint1024_t res, one = 1;
 		int16_t s = 0, m = 511, e = 1023;
 		while (e > 0) {
@@ -874,86 +879,86 @@ namespace math {
 		return *this -= res;
 	}
 
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator|(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator|(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res |= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator^(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator^(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res ^= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator&(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator&(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res &= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator>>(const int& n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator>>(const int& n) const {
 		uint1024_t res(*this);
 		res >>= n;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator<<(const int& n) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator<<(const int& n) const {
 		uint1024_t res(*this);
 		res <<= n;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator+(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator+(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res += x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator-(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator-(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res -= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator*(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator*(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res *= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator/(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator/(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res /= x;
 		return res;
 	}
-	[[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator%(const uint1024_t& x) const {
+	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t uint1024_t::operator%(const uint1024_t& x) const {
 		uint1024_t res(*this);
 		res %= x;
 		return res;
 	}
 
-	[[nodiscard]] uint1024_t::operator uint512_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint1024_t::operator uint512_t() const {
 		uint256_t res;
 		for (short i = 0; i < 16; i++)
 			res.buf[i] = buf[i + 16];
 		return res;
 	}
-	[[nodiscard]] uint1024_t::operator uint256_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint1024_t::operator uint256_t() const {
 		uint256_t res;
 		for (short i = 0; i < 8; i++)
 			res.buf[i] = buf[i + 24];
 		return res;
 	}
-	[[nodiscard]] uint1024_t::operator uint128_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint1024_t::operator uint128_t() const {
 		uint128_t res;
 		for (short i = 0; i < 4; i++)
 			res.buf[i] = buf[i + 28];
 		return res;
 	}
-	[[nodiscard]] uint1024_t::operator uint64_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint1024_t::operator uint64_t() const {
 		return ((uint64_t)buf[30] << 32) | buf[31];
 	}
-	[[nodiscard]] uint1024_t::operator uint32_t() const {
+	MATHPLUSPLUS_API [[nodiscard]] uint1024_t::operator uint32_t() const {
 		return buf[31];
 	}
 }
 
 namespace std {
 
-	[[nodiscard]] const string to_string(const math::uint128_t& x) {
+	MATHPLUSPLUS_API [[nodiscard]] const string to_string(const math::uint128_t& x) {
 		if (x == 0) return "0";
 		math::uint128_t tmp = x, s = 1;
 		while (s < tmp)
@@ -966,7 +971,7 @@ namespace std {
 		}
 		return res;
 	}
-	[[nodiscard]] const string to_string(const math::uint256_t& x) {
+	MATHPLUSPLUS_API [[nodiscard]] const string to_string(const math::uint256_t& x) {
 		if (x == 0) return "0";
 		math::uint256_t tmp = x, s = 1;
 		while (s < tmp)
@@ -979,7 +984,7 @@ namespace std {
 		}
 		return res;
 	}
-	[[nodiscard]] const string to_string(const math::uint512_t& x) {
+	MATHPLUSPLUS_API [[nodiscard]] const string to_string(const math::uint512_t& x) {
 		if (x == 0) return "0";
 		math::uint512_t tmp = x, s = 1;
 		while (s < tmp)
@@ -992,7 +997,7 @@ namespace std {
 		}
 		return res;
 	}
-	[[nodiscard]] const string to_string(const math::uint1024_t& x) {
+	MATHPLUSPLUS_API [[nodiscard]] const string to_string(const math::uint1024_t& x) {
 		if (x == 0) return "0";
 		math::uint1024_t tmp = x, s = 1;
 		while (s < tmp)
@@ -1007,49 +1012,15 @@ namespace std {
 	}
 }
 
-math::uint128_t operator ""_u128(const char* str, std::size_t len) {
-	math::uint128_t res = 0;
-	if (str[0] == '0') {
-		if (len == 1) return res;
-		if (str[1] == 'x') {
-			for (std::size_t i = 2; i < len; i++) {
-				if (str[i] >= '0' && str[i] <= '9') res = (res << 4) + (str[i] - '0');
-				else if (str[i] >= 'A' && str[i] <= 'F') res = (res << 4) + (str[i] - 'A' + 10);
-				else if (str[i] >= 'a' && str[i] <= 'f') res = (res << 4) + (str[i] - 'a' + 10);
-				else throw std::invalid_argument("Invalid hexadecimal digit");
-			}
-		}
-		else if (str[1] == 'b') {
-			for (std::size_t i = 2; i < len; i++) {
-				if (str[i] != '0' && str[i] != '1') throw std::invalid_argument("Invalid binary digit");
-				res = (res << 1) + (str[i] - '0');
-			}
-		}
-		else {
-			for (std::size_t i = 1; i < len; i++) {
-				if (str[i] < '0' || str[i] > '7') throw std::invalid_argument("Invalid octal digit");
-				res = (res << 3) + (str[i] - '0');
-			}
-		}
-	}
-	else {
-		for (std::size_t i = 0; i < len; i++) {
-			if (str[i] < '0' || str[i] > '9') throw std::invalid_argument("Invalid decimal digit");
-			res = (res * 10) + (str[i] - '0');
-		}
-	}
-	return res;
-}
-
-inline std::ostream& operator<<(std::ostream& os, const math::uint128_t& x) {
+MATHPLUSPLUS_API inline std::ostream& operator<<(std::ostream& os, const math::uint128_t& x) {
 	return os << std::to_string(x);
 }
-inline std::ostream& operator<<(std::ostream& os, const math::uint256_t& x) {
+MATHPLUSPLUS_API inline std::ostream& operator<<(std::ostream& os, const math::uint256_t& x) {
 	return os << std::to_string(x);
 }
-inline std::ostream& operator<<(std::ostream& os, const math::uint512_t& x) {
+MATHPLUSPLUS_API inline std::ostream& operator<<(std::ostream& os, const math::uint512_t& x) {
 	return os << std::to_string(x);
 }
-inline std::ostream& operator<<(std::ostream& os, const math::uint1024_t& x) {
+MATHPLUSPLUS_API inline std::ostream& operator<<(std::ostream& os, const math::uint1024_t& x) {
 	return os << std::to_string(x);
 }
