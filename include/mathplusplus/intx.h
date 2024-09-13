@@ -43,197 +43,197 @@ POSSIBILITY OF SUCH DAMAGE.
 
 namespace math {
 
-	class MATHPLUSPLUS_API uint128_t {
+	class uint128_t {
 	private:
 		std::array<uint32_t, 4> buf;
-		[[nodiscard]] constexpr inline const uint32_t operator[](int16_t n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint32_t operator[](int16_t n) const;
 	public:
-		constexpr uint128_t();
-		constexpr uint128_t(const uint64_t& x);
-		constexpr uint128_t(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr uint128_t();
+		MATHPLUSPLUS_API constexpr uint128_t(const uint64_t& x);
+		MATHPLUSPLUS_API constexpr uint128_t(const uint128_t& x);
 
-		[[nodiscard]] constexpr inline const bool operator==(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator!=(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator<(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator>(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator<=(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator>=(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator==(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator!=(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator<(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator>(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator<=(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator>=(const uint128_t& x) const;
 
-		constexpr inline uint128_t& operator=(const uint128_t& x);
-		constexpr inline uint128_t& operator|=(const uint128_t& x);
-		constexpr inline uint128_t& operator^=(const uint128_t& x);
-		constexpr inline uint128_t& operator&=(const uint128_t& x);
-		constexpr inline uint128_t& operator>>=(const int& n);
-		constexpr inline uint128_t& operator<<=(const int& n);
-		constexpr inline uint128_t& operator+=(const uint128_t& x);
-		constexpr inline uint128_t& operator-=(const uint128_t& x);
-		constexpr inline uint128_t& operator*=(const uint128_t& x);
-		constexpr inline uint128_t& operator/=(const uint128_t& x);
-		constexpr inline uint128_t& operator%=(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator=(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator|=(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator^=(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator&=(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator>>=(const int& n);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator<<=(const int& n);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator+=(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator-=(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator*=(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator/=(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr inline uint128_t& operator%=(const uint128_t& x);
 
-		[[nodiscard]] constexpr inline const uint128_t operator|(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const uint128_t operator^(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const uint128_t operator&(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const uint128_t operator>>(const int& n) const;
-		[[nodiscard]] constexpr inline const uint128_t operator<<(const int& n) const;
-		[[nodiscard]] constexpr inline const uint128_t operator+(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const uint128_t operator-(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const uint128_t operator*(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const uint128_t operator/(const uint128_t& x) const;
-		[[nodiscard]] constexpr inline const uint128_t operator%(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator|(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator^(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator&(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator>>(const int& n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator<<(const int& n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator+(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator-(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator*(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator/(const uint128_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint128_t operator%(const uint128_t& x) const;
 
-		[[nodiscard]] explicit operator uint64_t() const;
-		[[nodiscard]] explicit operator uint32_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint64_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint32_t() const;
 
 		friend class uint256_t;
 		friend class uint512_t;
 		friend class uint1024_t;
 	};
 
-	class MATHPLUSPLUS_API uint256_t {
+	class uint256_t {
 	private:
 		std::array<uint32_t, 8> buf;
-		[[nodiscard]] constexpr inline const uint32_t operator[](int16_t n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint32_t operator[](int16_t n) const;
 	public:
-		constexpr uint256_t();
-		constexpr uint256_t(const uint64_t& x);
-		constexpr uint256_t(const uint128_t& x);
-		constexpr uint256_t(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr uint256_t();
+		MATHPLUSPLUS_API constexpr uint256_t(const uint64_t& x);
+		MATHPLUSPLUS_API constexpr uint256_t(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr uint256_t(const uint256_t& x);
 
-		[[nodiscard]] constexpr inline const bool operator==(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator!=(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator<(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator>(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator<=(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator>=(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator==(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator!=(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator<(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator>(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator<=(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator>=(const uint256_t& x) const;
 
-		constexpr inline uint256_t& operator=(const uint256_t& x);
-		constexpr inline uint256_t& operator|=(const uint256_t& x);
-		constexpr inline uint256_t& operator^=(const uint256_t& x);
-		constexpr inline uint256_t& operator&=(const uint256_t& x);
-		constexpr inline uint256_t& operator>>=(const int& n);
-		constexpr inline uint256_t& operator<<=(const int& n);
-		constexpr inline uint256_t& operator+=(const uint256_t& x);
-		constexpr inline uint256_t& operator-=(const uint256_t& x);
-		constexpr inline uint256_t& operator*=(const uint256_t& x);
-		constexpr inline uint256_t& operator/=(const uint256_t& x);
-		constexpr inline uint256_t& operator%=(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator=(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator|=(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator^=(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator&=(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator>>=(const int& n);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator<<=(const int& n);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator+=(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator-=(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator*=(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator/=(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr inline uint256_t& operator%=(const uint256_t& x);
 
-		[[nodiscard]] constexpr inline const uint256_t operator|(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const uint256_t operator^(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const uint256_t operator&(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const uint256_t operator>>(const int& n) const;
-		[[nodiscard]] constexpr inline const uint256_t operator<<(const int& n) const;
-		[[nodiscard]] constexpr inline const uint256_t operator+(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const uint256_t operator-(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const uint256_t operator*(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const uint256_t operator/(const uint256_t& x) const;
-		[[nodiscard]] constexpr inline const uint256_t operator%(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator|(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator^(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator&(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator>>(const int& n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator<<(const int& n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator+(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator-(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator*(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator/(const uint256_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint256_t operator%(const uint256_t& x) const;
 
-		[[nodiscard]] explicit operator uint128_t() const;
-		[[nodiscard]] explicit operator uint64_t() const;
-		[[nodiscard]] explicit operator uint32_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint128_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint64_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint32_t() const;
 
 		friend class uint512_t;
 		friend class uint1024_t;
 	};
 
-	class MATHPLUSPLUS_API uint512_t {
+	class uint512_t {
 	private:
 		std::array<uint32_t, 16> buf;
-		[[nodiscard]] constexpr inline const uint32_t operator[](int16_t n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint32_t operator[](int16_t n) const;
 	public:
-		constexpr uint512_t();
-		constexpr uint512_t(const uint64_t& x);
-		constexpr uint512_t(const uint128_t& x);
-		constexpr uint512_t(const uint256_t& x);
-		constexpr uint512_t(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr uint512_t();
+		MATHPLUSPLUS_API constexpr uint512_t(const uint64_t& x);
+		MATHPLUSPLUS_API constexpr uint512_t(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr uint512_t(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr uint512_t(const uint512_t& x);
 
-		[[nodiscard]] constexpr inline const bool operator==(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator!=(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator<(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator>(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator<=(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator>=(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator==(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator!=(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator<(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator>(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator<=(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator>=(const uint512_t& x) const;
 
-		constexpr inline uint512_t& operator=(const uint512_t& x);
-		constexpr inline uint512_t& operator|=(const uint512_t& x);
-		constexpr inline uint512_t& operator^=(const uint512_t& x);
-		constexpr inline uint512_t& operator&=(const uint512_t& x);
-		constexpr inline uint512_t& operator>>=(const int& n);
-		constexpr inline uint512_t& operator<<=(const int& n);
-		constexpr inline uint512_t& operator+=(const uint512_t& x);
-		constexpr inline uint512_t& operator-=(const uint512_t& x);
-		constexpr inline uint512_t& operator*=(const uint512_t& x);
-		constexpr inline uint512_t& operator/=(const uint512_t& x);
-		constexpr inline uint512_t& operator%=(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator=(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator|=(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator^=(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator&=(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator>>=(const int& n);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator<<=(const int& n);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator+=(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator-=(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator*=(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator/=(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr inline uint512_t& operator%=(const uint512_t& x);
 
-		[[nodiscard]] constexpr inline const uint512_t operator|(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const uint512_t operator^(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const uint512_t operator&(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const uint512_t operator>>(const int& n) const;
-		[[nodiscard]] constexpr inline const uint512_t operator<<(const int& n) const;
-		[[nodiscard]] constexpr inline const uint512_t operator+(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const uint512_t operator-(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const uint512_t operator*(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const uint512_t operator/(const uint512_t& x) const;
-		[[nodiscard]] constexpr inline const uint512_t operator%(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator|(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator^(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator&(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator>>(const int& n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator<<(const int& n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator+(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator-(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator*(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator/(const uint512_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint512_t operator%(const uint512_t& x) const;
 
-		[[nodiscard]] explicit operator uint256_t() const;
-		[[nodiscard]] explicit operator uint128_t() const;
-		[[nodiscard]] explicit operator uint64_t() const;
-		[[nodiscard]] explicit operator uint32_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint256_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint128_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint64_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint32_t() const;
 
 		friend class uint1024_t;
 	};
 
-	class MATHPLUSPLUS_API uint1024_t {
+	class uint1024_t {
 	private:
 		std::array<uint32_t, 32> buf;
-		[[nodiscard]] constexpr inline const uint32_t operator[](int16_t n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint32_t operator[](int16_t n) const;
 	public:
-		constexpr uint1024_t();
-		constexpr uint1024_t(const uint64_t& x);
-		constexpr uint1024_t(const uint128_t& x);
-		constexpr uint1024_t(const uint256_t& x);
-		constexpr uint1024_t(const uint512_t& x);
-		constexpr uint1024_t(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr uint1024_t();
+		MATHPLUSPLUS_API constexpr uint1024_t(const uint64_t& x);
+		MATHPLUSPLUS_API constexpr uint1024_t(const uint128_t& x);
+		MATHPLUSPLUS_API constexpr uint1024_t(const uint256_t& x);
+		MATHPLUSPLUS_API constexpr uint1024_t(const uint512_t& x);
+		MATHPLUSPLUS_API constexpr uint1024_t(const uint1024_t& x);
 
-		[[nodiscard]] constexpr inline const bool operator==(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator!=(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator<(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator>(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator<=(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const bool operator>=(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator==(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator!=(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator<(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator>(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator<=(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const bool operator>=(const uint1024_t& x) const;
 
-		constexpr inline uint1024_t& operator=(const uint1024_t& x);
-		constexpr inline uint1024_t& operator|=(const uint1024_t& x);
-		constexpr inline uint1024_t& operator^=(const uint1024_t& x);
-		constexpr inline uint1024_t& operator&=(const uint1024_t& x);
-		constexpr inline uint1024_t& operator>>=(const int& n);
-		constexpr inline uint1024_t& operator<<=(const int& n);
-		constexpr inline uint1024_t& operator+=(const uint1024_t& x);
-		constexpr inline uint1024_t& operator-=(const uint1024_t& x);
-		constexpr inline uint1024_t& operator*=(const uint1024_t& x);
-		constexpr inline uint1024_t& operator/=(const uint1024_t& x);
-		constexpr inline uint1024_t& operator%=(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator=(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator|=(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator^=(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator&=(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator>>=(const int& n);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator<<=(const int& n);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator+=(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator-=(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator*=(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator/=(const uint1024_t& x);
+		MATHPLUSPLUS_API constexpr inline uint1024_t& operator%=(const uint1024_t& x);
 
-		[[nodiscard]] constexpr inline const uint1024_t operator|(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const uint1024_t operator^(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const uint1024_t operator&(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const uint1024_t operator>>(const int& n) const;
-		[[nodiscard]] constexpr inline const uint1024_t operator<<(const int& n) const;
-		[[nodiscard]] constexpr inline const uint1024_t operator+(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const uint1024_t operator-(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const uint1024_t operator*(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const uint1024_t operator/(const uint1024_t& x) const;
-		[[nodiscard]] constexpr inline const uint1024_t operator%(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator|(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator^(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator&(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator>>(const int& n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator<<(const int& n) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator+(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator-(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator*(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator/(const uint1024_t& x) const;
+		MATHPLUSPLUS_API [[nodiscard]] constexpr inline const uint1024_t operator%(const uint1024_t& x) const;
 
-		[[nodiscard]] explicit operator uint512_t() const;
-		[[nodiscard]] explicit operator uint256_t() const;
-		[[nodiscard]] explicit operator uint128_t() const;
-		[[nodiscard]] explicit operator uint64_t() const;
-		[[nodiscard]] explicit operator uint32_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint512_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint256_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint128_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint64_t() const;
+		MATHPLUSPLUS_API [[nodiscard]] explicit operator uint32_t() const;
 	};
 }
 
