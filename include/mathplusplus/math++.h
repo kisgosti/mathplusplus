@@ -36,3 +36,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "trig.h"
 #include "intx.h"
 #include "complex.h"
+#include "matrix.h"
+#include "vec2.h"
+#include "vec3.h"

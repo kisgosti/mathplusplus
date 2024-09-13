@@ -41,56 +41,56 @@ namespace math {
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto sec(const T& x) {
-		return 1 / cos(x);
+		return 1.0 / cos(x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto csc(const T& x) {
-		return 1 / sin(x);
+		return 1.0 / sin(x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto actg(const T& x) {
-		return atan(1 / x);
+		return atan(1.0 / x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto asec(const T& x) {
-		return acos(1 / x);
+		return acos(1.0 / x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto acsc(const T& x) {
-		return asin(1 / x);
+		return asin(1.0 / x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto ctgh(const T& x) {
-		return 1 / tanh(x);
+		return 1.0 / tanh(x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto sech(const T& x) {
-		return 1 / cosh(x);
+		return 1.0 / cosh(x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto csch(const T& x) {
-		return 1 / sinh(x);
+		return 1.0 / sinh(x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto actgh(const T& x) {
-		return atanh(1 / x);
+		return atanh(1.0 / x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto asech(const T& x) {
-		return acosh(1 / x);
+		return acosh(1.0 / x);
 	}
 
 	template<typename T>
 	MATHPLUSPLUS_API [[nodiscard]] constexpr inline const auto acsch(const T& x) {
-		return asinh(1 / x);
+		return asinh(1.0 / x);
 	}
 }
